@@ -12,7 +12,7 @@ let score = 0;
 function drawSnake() {
     snake.forEach((segment, index) => {
         const alpha = ((index) / snake.length);
-        ctx.fillStyle = `rgba(300, 300, 300, ${1-alpha})`;
+        ctx.fillStyle = `rgba(0, 300, 0, ${1-alpha})`;
         ctx.fillRect(segment.x * CELL_SIZE, segment.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     });
 }
@@ -65,9 +65,8 @@ function moveSnake() {
 }
 
 function placeApple() {
-    apple.x = Math.floor(Math.random() * (GRID_SIZE));
-    apple.y = Math.floor(Math.random() * (GRID_SIZE));
-    console.log(`${apple.x} ${apple.y}`);
+    apple.x = Math.floor(Math.random() * GRID_SIZE);
+    apple.y = Math.floor(Math.random() * GRID_SIZE);
     if (snake.some(segment => segment.x === apple.x && segment.y === apple.y)) {
         placeApple();
     }
@@ -96,7 +95,6 @@ function draw() {
         return;
     }
 
-    
     setTimeout(() => {
         requestAnimationFrame(draw);
     }, 100);
@@ -122,6 +120,28 @@ document.addEventListener('keydown', (event) => {
             dy = 0;
             break;
     }
+});
+
+// Add the following code to handle button clicks for mobile controls
+
+document.getElementById('upButton').addEventListener('click', () => {
+    dx = 0;
+    dy = -1;
+});
+
+document.getElementById('downButton').addEventListener('click', () => {
+    dx = 0;
+    dy = 1;
+});
+
+document.getElementById('leftButton').addEventListener('click', () => {
+    dx = -1;
+    dy = 0;
+});
+
+document.getElementById('rightButton').addEventListener('click', () => {
+    dx = 1;
+    dy = 0;
 });
 
 requestAnimationFrame(draw);
