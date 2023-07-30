@@ -44,3 +44,9 @@ canvas {
 .control-button:hover {
     background-color: #555;
 }
+
+@media (min-width: 768px) {
+    .mobile-controls {
+        display: none;
+    }
+}
